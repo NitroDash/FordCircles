@@ -4,6 +4,7 @@ var center = 0.5;
 var width = 2.2;
 var height = 1;
 var pixelScale = 1;
+var showInstructions = true;
 
 var left, right;
 
@@ -36,6 +37,7 @@ function update() {
     if (keys.isDown("in")) width *= 1.01;
     if (keys.isDown("left")) center -= width*PAN_SPEED;
     if (keys.isDown("right")) center += width*PAN_SPEED;
+    if (keys.isDown("out") || keys.isDown("in") || keys.isDown("left") || keys.isDown("right")) showInstructions = false;
 }
 
 function render() {
@@ -53,6 +55,8 @@ function render() {
     drawFordCircle(0,1);
     drawFordCircle(1,1);
     drawCircleInterval(0,1, 1,1);
+    ctx.font = Math.floor(canvas.height/20) + "px sans-serif";
+    if (showInstructions) ctx.fillText("Use arrow keys to navigate", canvas.width/2, canvas.height/2);
 }
 
 function drawCircleInterval(a1,b1, a2,b2) {
